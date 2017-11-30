@@ -7,17 +7,15 @@ var Stack = function() {
 
   // Implement the methods below
   someInstance.push = function(value) {
-    if (!storage.hasOwnProperty(value)) {
-      storage[count] = value;
-      count++;
-    }
+    storage[count] = value;
+    count++;
   };
- //{ 1 : 'a', 2 : 'b'}  count = 2 props
+ 
   someInstance.pop = function() {
     if (count > 0) {
-      count--; // storage[1] = a
-      var popped = storage[count]; // 2 : 'b'
-      delete storage[count]; // { 1 : 'a'}
+      count--;
+      var popped = storage[count];
+      delete storage[count];
       return popped;
     }
   };
