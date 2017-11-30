@@ -13,7 +13,6 @@ var Queue = function() {
 
   someInstance.dequeue = function() {
     if (count > 0) {
-      
       var dequeued = storage[0];
       delete storage[0];
   
