@@ -45,4 +45,7 @@ var Node = function(value) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * addToTail: O(1) because we simply move pointers
+ * removeHead: O(1) because we simply move pointers
+ * contains: O(n) because we iterate over all nodes to find target
  */
