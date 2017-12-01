@@ -22,32 +22,24 @@ treeMethods.addChild = function(value) {
 
 treeMethods.contains = function(target) {
   if (target in this) { 
-    return true; 
-  }
-
-  // var searchChildren = function(root) {
-  console.log('first' + this.children);
-  if (Object.keys(this) === target) {
-    console.log('second hello'); 
     return true;
-  }
-
-  if (this.children) {
-    for (let i = 0; i < this.children.length; i++) {
-      console.log(this.children[i]);
-      return this.children[i].contains(target);
+  } else {
+    if (this.children) {
+      for (let i = 0; i < this.children.length; i++) {
+        if (this.children[i].contains(target)) {
+          return true;
+        }
+      }
     }
+    return false;
   }
-
-  return false;
-  // };
-  
-  return searchChildren(this);
-  // return false;
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * 
+ * addChild: O(1) because we push to the end of the array
+ * contains: at least O(n^2) because of nested iterations -- recursion within for loop
  */
