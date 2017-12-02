@@ -8,7 +8,6 @@ var Graph = function() {
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
-  // var newNode = new Graph(node);
   this.nodes[node] = node;
 };
 
@@ -21,15 +20,18 @@ Graph.prototype.contains = function(node) {
 Graph.prototype.removeNode = function(node) {
   if (this.contains(node)) {
     delete this.nodes[node];
+    delete this.edges[node];
   }
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
   for (var key in this.edges) {
-    if ((this.edges[key][0] === fromNode && this.edges[key][1] === toNode) || 
-        (this.edges[key][0] === toNode && this.edges[key][1] === fromNode)) {
-      return true;
+    if (fromNode && toNode) {
+      if ((this.edges[key][0] === fromNode && this.edges[key][1] === toNode) || 
+          (this.edges[key][0] === toNode && this.edges[key][1] === fromNode)) {
+        return true;
+      }
     }
   }
   return false;
@@ -38,24 +40,33 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
   this.edges[fromNode] = [fromNode, toNode];
-  this.edges[toNode] = [toNode, fromNode];
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  return this.hasEdge(fromNode, toNode) ? true : false;
+  if (this.hasEdge(fromNode, toNode) || this.hasEdge(toNode, fromNode)) {
+    delete this.edges[fromNode];
+  }
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   for (var key in this.nodes) {
-    cb(key);
+    cb(this.nodes[key]);
   }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
-
+ *
+ * addNodes     O(1)
+ * contains     O(1)
+ * removeNode   O(1)
+ * hasEdge      O(n) iteration over object edges
+ * addEdge      O(1) 
+ * removeEdge   O(n) iteration over object edges
+ * forEachNode  O(n) iteration over object nodes
+ *
  */
 
 
