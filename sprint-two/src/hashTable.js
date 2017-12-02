@@ -39,6 +39,9 @@ HashTable.prototype.remove = function(k) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * insert: O(1) because it uses indices to access/push values
+ * retrieve: O(n) because it will (on average) iterate over all innerArrays
+ * remove: O(1) because it uses indices to set values
  */
 
 
