@@ -28,22 +28,24 @@ BinarySearchTree.prototype.contains = function(target) {
   if (this.value === target) {
     isFound = true;
   } else if (this.value > target && this.left) {
-    // recursion left side
     return this.left.contains(target);
   } else if (this.value < target && this.right) {
-    // recursion right side
     return this.right.contains(target);
   }
   return isFound;
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(callback) {
-  for (var key in this) {
-    callback(this.value);
-  } 
+  if (this) { callback(this.value); }
+  if (this.left) { this.left.depthFirstLog(callback); }
+  if (this.right) { this.right.depthFirstLog(callback); }
 };
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * 
+ * insert: O(log n) because the program searches one side at a time
+ * contains: O(log n) because the program searches one side at a time
+ * depthFirstLog: O(n) because it iterates over all nodes
  */
