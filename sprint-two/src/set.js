@@ -11,7 +11,7 @@ setPrototype.add = function(item) {
   // if (!this.contains(item)) {
   //   this._storage.push(item);
   // }
-  if (!this.contains(item)) {
+  if (!this.contains(item) && this._storage[item] !== item) {
     this._storage[item] = item;
   }
 };
