@@ -20,6 +20,11 @@ describe('graph', function() {
     expect(graph.contains(1)).to.equal(true);
   });
 
+  it('should not store nodes that were not inserted', function() {
+    graph.addNode(1);
+    expect(graph.contains(2)).to.equal(false);
+  });
+
   it('should remove nodes that were inserted', function() {
     graph.addNode(2);
     expect(graph.contains(2)).to.equal(true);
@@ -34,6 +39,17 @@ describe('graph', function() {
     graph.addEdge(3, 2);
     expect(graph.hasEdge(3, 2)).to.equal(true);
     expect(graph.hasEdge(3, 1)).to.equal(false);
+  });
+
+  it('should not create duplicate edges between two nodes', function() {
+    graph.addNode(2);
+    graph.addNode(1);
+    graph.addNode(3);
+    graph.addEdge(3, 2);
+    graph.addEdge(1, 3);
+    // graph.addEdge(2, 3);
+    expect(graph.hasEdge(2, 3)).to.equal(true);
+    expect(graph.addEdge(3, 2)).to.equal(undefined);
   });
 
   it('should remove edges between nodes', function() {
@@ -53,6 +69,18 @@ describe('graph', function() {
     graph.removeNode(5);
     expect(graph.hasEdge(4, 5)).to.equal(false);
   });
+
+  // it('should remove edges between nodes when a node is removed', function() {
+  //   graph.addNode(4);
+  //   graph.addNode(5);
+  //   graph.addNode(6);
+  //   graph.addEdge(5, 4);
+  //   graph.addEdge(5, 6);
+  //   expect(graph.hasEdge(4, 5)).to.equal(true);
+  //   graph.removeNode(5);
+  //   expect(graph.hasEdge(4, 5)).to.equal(false);
+  //   expect(graph.hasEdge(6, 5)).to.equal(false);
+  // });
 
   it('should execute a callback on each node in the graph', function() {
     var connectToFive = function(item) {

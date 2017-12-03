@@ -31,6 +31,22 @@ describe('linkedList', function() {
     expect(linkedList.head.value).to.equal(5);
   });
 
+  it('should not remove the tail from the list when adding a node', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.head.value).to.equal(4);
+    linkedList.addToTail(6);
+    expect(linkedList.tail.value).to.equal(6);
+  });
+
+  it('should not remove the tail when calling removeHead, unless the tail is the head', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.removeHead()).to.equal(4);
+    linkedList.addToTail(5);
+    linkedList.addToTail(6);
+    expect(linkedList.removeHead()).to.equal(5);
+  });
+
   it('should return the value of the former head when removeHead is called', function() {
     linkedList.addToTail(4);
     expect(linkedList.removeHead()).to.equal(4);
