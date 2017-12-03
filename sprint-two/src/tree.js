@@ -5,6 +5,7 @@ var Tree = function(value) {
   newTree.children = [];
   newTree.addChild = treeMethods.addChild;
   newTree.contains = treeMethods.contains;
+  newTree.removeChild = treeMethods.removeChild;
 
   return newTree;
 };
@@ -21,7 +22,7 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  if (target in this) { 
+  if (target in this) {
     return true;
   } else {
     if (this.children) {
